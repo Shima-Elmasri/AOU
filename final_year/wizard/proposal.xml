@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+        <record id="proposal_proposal_form_wiz" model="ir.ui.view">
+            <field name="name">proposal.proposal.form</field>
+            <field name="model">proposal.proposal</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" widget="statusbar" options="{'clickable': '0', 'fold_field': 'fold'}"/>
+                        <button name="submit" string="Submit" states="initial" type="object" class="oe_highlight"
+                                groups="final_year.group_consort_student"/>
+                         <button name="accept" string="Accept" states="waiting" type="object" class="oe_highlight"
+                                groups="final_year.module_consort_doctor"/>
+                        <button name="send" string="Send Modification to student " states="waiting" type="object"
+                                class="oe_highlight" groups="final_year.module_consort_doctor"/>
+                        <button name="reject" string="Reject" states="waiting" type="object" class="oe_highlight"
+                                groups="final_year.module_consort_doctor"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <div class="oe_title">
+                                <h3>Student Information</h3>
+                                <h5></h5>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="student_id"/>
+                            <field name="student_name"/>
+                            <field name="student_track"/>
+                        </group>
+                    </sheet>
+                    <sheet>
+                        <group>
+                            <div class="oe_title">
+                                <h3>Project General Information</h3>
+                                <h5></h5>
+                            </div>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="type" widget="radio" attrs="{'readonly': [('state', '!=', 'initial'),('state', '!=', 'send')]}"/>
+                            </group>
+                            <group>
+                                <field name="checkbox1" groups="final_year.module_consort_doctor"/>
+                                <field name="note1"  attrs="{'invisible': [('checkbox1', '=', False)],'readonly': [('state', '!=', 'initial'),('state', '!=', 'send'),('state', '!=', 'waiting') ]}" groups="final_year.module_consort_doctor"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <sheet>
+                        <group>
+                            <div class="oe_title">
+                                <h3>Project Core Information</h3>
+                                <h5></h5>
+                            </div>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="problem"  attrs="{'readonly': [('state', '!=', 'initial'),('state', '!=', 'send')]}"/>
+                            </group>
+                            <group>
+                                <field name="checkbox2" groups="final_year.module_consort_doctor"/>
+                                <field name="note2" attrs="{'invisible': [('checkbox2', '=', False)], 'readonly': [('state', '!=', 'initial'),('state', '!=', 'send'),('state', '!=', 'waiting') ]}" groups="final_year.module_consort_doctor"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="solution"
+                                      attrs="{'readonly': [('state', '!=', 'initial'),('state', '!=', 'send') ]}" />
+                            </group>
+                            <group>
+                                <field name="checkbox3" groups="final_year.module_consort_doctor"/>
+                                <field name="note3"  attrs="{'invisible': [('checkbox3', '=', False)], 'readonly': [('state', '!=', 'initial'),('state', '!=', 'send'),('state', '!=', 'waiting') ]}" groups="final_year.module_consort_doctor"/>
+                            </group>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_proposal_proposal_wiz" model="ir.actions.act_window">
+            <field name="name">proposal</field>
+            <field name="res_model">proposal.proposal</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="proposal_proposal_form_wiz"/>
+            <field name="target">new</field>
+        </record>
+
+
+
+
+</odoo>

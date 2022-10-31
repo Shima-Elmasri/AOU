@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record id="ideas_tree_view" model="ir.ui.view">
+        <field name="name">ideas.idea.tree</field>
+        <field name="model">ideas.ideas</field>
+        <field name="arch" type="xml">
+            <tree string="Ideas">
+                <field name="name"/>
+                <field name="create_uid"/>
+                <field name="initial_type"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="ideas_form_view" model="ir.ui.view">
+        <field name="name">ideas.idea.form</field>
+        <field name="model">ideas.ideas</field>
+        <field name="arch" type="xml">
+            <form string="Ideas student">
+                <header>
+                    <field name="state" widget="statusbar" options="{'clickable': '1', 'fold_field': 'fold'}"/>
+                    <button name="submit" string="Submit" states="initial" type="object" class="oe_highlight"
+                            groups="final_year.group_consort_student"/>
+                    <button name="accept" string="Accept" states="waiting" type="object" class="oe_highlight"
+                            groups="final_year.module_consort_doctor"/>
+                    <button name="%(action_proposal_proposal_wiz)d"
+                            attrs="{'invisible': ['|',('count_proposal','=', 1),('state', 'in', ['initial', 'waiting'])]}"
+                            type="action"
+                            icon="fa-pencil-square-o "
+                            class="oe_highlight"
+                            string="Make proposal"
+                            context="{'default_name': active_id, 'default_type' : initial_type }"
+                            groups="final_year.group_consort_student">
+                        <field name="count_proposal" widget="statinfo"/>
+                    </button>
+
+                    <button name="action_view_proposal" type="object"
+                            string="Proposal"
+                            class="oe_highlight"
+                            attrs="{'invisible': ['|',('count_proposal','!=', 1),('state', 'in', ['initial', 'waiting'])]}">
+                        <field name="count_proposal" widget="statinfo"/>
+                    </button>
+
+                    <button name="reject" string="Reject" states="waiting" type="object" class="oe_highlight"
+                            groups="final_year.module_consort_doctor"/>
+                </header>
+                <sheet>
+                    <div class="oe_title" attrs="{'invisible': [('id', '!=', False)]}">
+                        <h1>Add IDea</h1>
+                        <h6>Fill out the detials to make new idea</h6>
+                        <h5></h5>
+                    </div>
+                    <div class="oe_title">
+                        <h1>Title:
+                            <field name="name" attrs="{'readonly': [('state', '!=', 'initial')]}"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="initial_type" attrs="{'readonly': [('state', '!=', 'initial') ]}"  widget="radio"/>
+                            <field name="description" attrs="{'readonly': [('state', '!=', 'initial')]}"/>
+                        </group>
+                        <group>
+                            <field name="create_uid"/>
+                        </group>
+                    </group>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+
+    <record id="ideas_ideas_action" model="ir.actions.act_window">
+        <field name="name">Ideas</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ideas.ideas</field>
+        <field name="view_id" ref="ideas_tree_view"/>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

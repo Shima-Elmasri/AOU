@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_ideas_ideas_admin,access.ideas.ideas,model_ideas_ideas,group_consort_student,1,1,1,1
+access_ideas_ideas_student,access.ideas.ideas,model_ideas_ideas,module_consort_doctor,1,1,0,1
+
+access_proposal_proposal_student,access.proposal.proposal,model_proposal_proposal,group_consort_student,1,1,1,1
+access_proposal_proposal_doctor,access.proposal.proposal,model_proposal_proposal,module_consort_doctor,1,1,0,1
+
+access_section_section_student,access.section.section,model_section_section,group_consort_student,1,0,0,0
+access_section_section_doctor,access.section.section,model_section_section,module_consort_doctor,1,1,1,1
+
+
+
+
+

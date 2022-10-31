@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <data>
+
+        <!-- Top menu item -->
+        <menuitem id="final_year_main_root"
+                  name="Final Year"
+                  sequence="10"/>
+
+        <!--Ideas menu-->
+        <menuitem id="ideas_menu_root"
+                  name="Ideas"
+                  parent="final_year_main_root"
+                  action="ideas_ideas_action"
+                  sequence="20"/>
+
+
+                <!--Proposal menu-->
+        <menuitem id="proposal_menu_root"
+                  name="Proposal"
+                  parent="final_year_main_root"
+                  action="proposal_proposal_action"
+                  sequence="30"/>
+
+                <!--Section menu-->
+        <menuitem id="section_menu_root"
+                  name="Section"
+                  parent="final_year_main_root"
+                  action="section_section_action"
+                  sequence="30"/>
+</data>
+</odoo>
